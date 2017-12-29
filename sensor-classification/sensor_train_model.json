@@ -1,0 +1,21 @@
+{
+    "pipeline": {
+        "name": "sensor_model"
+    },
+    "transform": {
+        "image": "frankhinek/pachydemo:sensor-rnn",
+        "cmd": [ "/bin/bash" ],
+        "stdin": [
+            "python train_model.py --input_dir /pfs/sensor_training_data --output_dir /pfs/out"
+        ]
+    },
+    "parallelism_spec": {
+        "constant": 1
+    },
+    "input": {
+        "atom": {
+            "repo": "sensor_training_data",
+            "glob": "/"
+        }
+    }
+}

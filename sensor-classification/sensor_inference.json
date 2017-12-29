@@ -1,0 +1,31 @@
+{
+    "pipeline": {
+        "name": "sensor_inference"
+    },
+    "transform": {
+        "image": "frankhinek/pachydemo:sensor-rnn",
+        "cmd": [ "/bin/bash" ],
+        "stdin": [
+            "python infer.py --input_dir /pfs/sensor_measurements --model_dir /pfs/sensor_model --output_dir /pfs/out"
+        ]
+    },
+    "parallelism_spec": {
+        "coefficient": 1.0
+    },
+    "input": {
+        "cross": [
+            {
+                "atom": {
+                    "repo": "sensor_measurements",
+                    "glob": "/*"
+                }
+            },
+            {
+                "atom": {
+                    "repo": "sensor_model",
+                    "glob": "/"
+                }
+            }
+        ]
+    }
+}
